@@ -1,58 +1,102 @@
 package com.app.bookfinder.ui.theme
 
-import android.app.Activity
-import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+enum class ThemeStyle {
+    WINE, BEIGE, GRAY, ROSEWOOD, GREEN
+}
+@Stable
+data class BookFinderColors(
+    val screenBackground: Color,
+    val screenText: Color,
+    val buttonBackground: Color,
+    val buttonText: Color,
+    val inputBackground: Color,
+    val cardBackground: Color
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+val WineColorScheme = BookFinderColors(
+    screenBackground = BrandWine,
+    screenText = BrandBeige,
+    buttonBackground = BrandWine,
+    buttonText = BrandBeige,
+    inputBackground = NeutralGrayAlpha45,
+    cardBackground = BrandBeige
 )
 
+val BeigeColorScheme = BookFinderColors(
+    screenBackground = BrandBeige,
+    screenText = BrandWine,
+    buttonBackground = BrandWine,
+    buttonText = BrandBeige,
+    inputBackground = NeutralGrayAlpha45,
+    cardBackground = BrandBeige
+)
+
+val GrayColorScheme = BookFinderColors(
+    screenBackground = NeutralGray,
+    screenText = BrandBeige,
+    buttonBackground = BrandWine,
+    buttonText = BrandBeige,
+    inputBackground = NeutralGrayAlpha45,
+    cardBackground = BrandBeige
+)
+
+val RosewoodColorScheme = BookFinderColors(
+    screenBackground = BrandRosewood,
+    screenText = BrandWine,
+    buttonBackground = BrandWine,
+    buttonText = BrandBeige,
+    inputBackground = NeutralGrayAlpha45,
+    cardBackground = BrandBeige
+)
+
+val GreenColorScheme = BookFinderColors(
+    screenBackground = BrandGreen,
+    screenText = BrandWine,
+    buttonBackground = BrandWine,
+    buttonText = BrandBeige,
+    inputBackground = BrandBeige,
+    cardBackground = BrandBeige
+)
+
+val LocalBookFinderColors = staticCompositionLocalOf { WineColorScheme }
+
+object BookFinderTheme {
+    val colors: BookFinderColors
+        @Composable
+        get() = LocalBookFinderColors.current
+    val typography: androidx.compose.material3.Typography
+        @Composable
+        get() = Typography
+}
 @Composable
 fun BookFinderTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    themeStyle: ThemeStyle = ThemeStyle.WINE,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
 
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+    val colorScheme = when (themeStyle) {
+        ThemeStyle.WINE -> WineColorScheme
+        ThemeStyle.BEIGE -> BeigeColorScheme
+        ThemeStyle.GRAY -> GrayColorScheme
+        ThemeStyle.ROSEWOOD -> RosewoodColorScheme
+        ThemeStyle.GREEN -> GreenColorScheme
     }
 
     MaterialTheme(
-        colorScheme = colorScheme,
         typography = Typography,
-        content = content
+        content = {
+            CompositionLocalProvider(
+                LocalBookFinderColors provides colorScheme
+            ) {
+                content()
+            }
+        }
     )
 }
