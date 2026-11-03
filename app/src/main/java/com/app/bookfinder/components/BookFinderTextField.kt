@@ -23,7 +23,7 @@ fun BookFinderTextField(
     onValueChange: (String) -> Unit,
     placeholder: String,
     modifier: Modifier = Modifier,
-    isPassword: Boolean = false
+    isPassword: Boolean = false,
 ) {
     OutlinedTextField(
         value = value,
@@ -32,7 +32,7 @@ fun BookFinderTextField(
             Text(
                 text = placeholder,
                 color = BookFinderTheme.colors.screenText.copy(alpha = 0.7f),
-                style = BookFinderTheme.typography.bodyLarge
+                style = BookFinderTheme.typography.bodyLarge,
             )
         },
         modifier = modifier
@@ -41,7 +41,7 @@ fun BookFinderTextField(
         shape = RoundedCornerShape(30.dp),
         singleLine = true,
         textStyle = BookFinderTheme.typography.bodyLarge.copy(
-            color = BookFinderTheme.colors.screenText
+            color = BookFinderTheme.colors.screenText,
         ),
         visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
         colors = OutlinedTextFieldDefaults.colors(
@@ -49,8 +49,8 @@ fun BookFinderTextField(
             unfocusedContainerColor = BookFinderTheme.colors.inputBackground,
             focusedBorderColor = Color.Transparent,
             unfocusedBorderColor = Color.Transparent,
-            cursorColor = BookFinderTheme.colors.screenText
-        )
+            cursorColor = BookFinderTheme.colors.screenText,
+        ),
     )
 }
 
@@ -62,7 +62,7 @@ fun BookFinderTextFieldPreview() {
             value = "",
             onValueChange = {},
             placeholder = "usuário",
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(16.dp),
         )
     }
 }
@@ -76,7 +76,7 @@ fun BookFinderPasswordTextFieldPreview() {
             onValueChange = {},
             placeholder = "senha",
             isPassword = true,
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(16.dp),
         )
     }
 }

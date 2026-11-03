@@ -42,7 +42,7 @@ fun LoginScreen(
     initialUsername: String = "",
     onLoginClick: (String, String) -> Unit,
     onRegisterClick: () -> Unit,
-    onGoogleClick: () -> Unit = {}
+    onGoogleClick: () -> Unit = {},
 ) {
     var username by remember(initialUsername) { mutableStateOf(initialUsername) }
     var password by remember { mutableStateOf("") }
@@ -52,7 +52,7 @@ fun LoginScreen(
             .fillMaxSize()
             .background(BookFinderTheme.colors.screenBackground)
             .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Spacer(modifier = Modifier.height(48.dp))
 
@@ -62,18 +62,18 @@ fun LoginScreen(
             style = BookFinderTheme.typography.displayLarge,
             color = BrandBeige,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(horizontal = 24.dp)
+            modifier = Modifier.padding(horizontal = 24.dp),
         )
 
         Spacer(modifier = Modifier.height(12.dp))
 
         // Subtitle
         Text(
-            text = "Faça login e me deixe ajudar-lo(a) a encontrar um bom livro!",
+            text = "Faça login e me me deixe ajudar-lo(a) a encontrar um bom livro!",
             style = BookFinderTheme.typography.bodyLarge,
             color = BrandBeige,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(horizontal = 32.dp)
+            modifier = Modifier.padding(horizontal = 32.dp),
         )
 
         Spacer(modifier = Modifier.height(28.dp))
@@ -82,7 +82,7 @@ fun LoginScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp),
-            contentAlignment = Alignment.TopCenter
+            contentAlignment = Alignment.TopCenter,
         ) {
             // Card Content Container
             Column(
@@ -92,12 +92,12 @@ fun LoginScreen(
                     .clip(RoundedCornerShape(32.dp))
                     .background(BrandBeige)
                     .padding(start = 24.dp, end = 24.dp, top = 50.dp, bottom = 24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 BookFinderTextField(
                     value = username,
                     onValueChange = { username = it },
-                    placeholder = "usuário"
+                    placeholder = "usuário",
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -106,7 +106,7 @@ fun LoginScreen(
                     value = password,
                     onValueChange = { password = it },
                     placeholder = "senha",
-                    isPassword = true
+                    isPassword = true,
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
@@ -116,7 +116,7 @@ fun LoginScreen(
                     onClick = { onLoginClick(username, password) },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(48.dp)
+                        .height(48.dp),
                 )
 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -124,7 +124,7 @@ fun LoginScreen(
                 Text(
                     text = "Não possui cadastro?",
                     style = BookFinderTheme.typography.bodyLarge,
-                    color = BrandWine
+                    color = BrandWine,
                 )
 
                 Spacer(modifier = Modifier.height(12.dp))
@@ -134,7 +134,7 @@ fun LoginScreen(
                     onClick = onRegisterClick,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(48.dp)
+                        .height(48.dp),
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
@@ -143,23 +143,23 @@ fun LoginScreen(
                     text = "Se preferir, acesse com sua conta",
                     style = BookFinderTheme.typography.bodyLarge,
                     color = BrandWine,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Box(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(
                         text = "Google",
                         style = BookFinderTheme.typography.bodyLarge.copy(
                             fontWeight = FontWeight.Bold,
-                            color = BrandWine
+                            color = BrandWine,
                         ),
                         modifier = Modifier
                             .align(Alignment.Center)
-                            .clickable { onGoogleClick() }
+                            .clickable { onGoogleClick() },
                     )
 
                     Image(
@@ -168,7 +168,7 @@ fun LoginScreen(
                         modifier = Modifier
                             .size(120.dp)
                             .align(Alignment.BottomEnd)
-                            .offset(x = 12.dp, y = 54.dp)
+                            .offset(x = 12.dp, y = 54.dp),
                     )
                 }
             }
@@ -177,14 +177,14 @@ fun LoginScreen(
                 modifier = Modifier
                     .align(Alignment.TopCenter)
                     .offset(y = 0.dp),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.stack_books),
                     contentDescription = "Pilha de livros",
                     modifier = Modifier
                         .size(width = 130.dp, height = 75.dp)
-                        .offset(x = 40.dp, y = (-80).dp)
+                        .offset(x = 40.dp, y = (-80).dp),
                 )
 
                 Image(
@@ -192,7 +192,7 @@ fun LoginScreen(
                     contentDescription = "Gatinha Frajola",
                     modifier = Modifier
                         .size(width = 130.dp, height = 180.dp)
-                        .offset(x = (-25).dp, y = (-70).dp)
+                        .offset(x = (-25).dp, y = (-70).dp),
                 )
             }
         }
@@ -207,7 +207,7 @@ fun LoginScreenPreview() {
     BookFinderTheme(themeStyle = ThemeStyle.WINE) {
         LoginScreen(
             onLoginClick = { _, _ -> },
-            onRegisterClick = {}
+            onRegisterClick = {},
         )
     }
 }

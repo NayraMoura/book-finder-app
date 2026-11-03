@@ -1,4 +1,4 @@
-package com.app.bookfinder.data.repository
+package com.app.bookfinder.data.local.repository
 
 import com.app.bookfinder.data.local.UserDao
 import com.app.bookfinder.data.local.UserEntity

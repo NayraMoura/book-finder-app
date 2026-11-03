@@ -17,7 +17,7 @@ data class BookFinderColors(
     val buttonBackground: Color,
     val buttonText: Color,
     val inputBackground: Color,
-    val cardBackground: Color
+    val cardBackground: Color,
 )
 
 val WineColorScheme = BookFinderColors(
@@ -26,7 +26,7 @@ val WineColorScheme = BookFinderColors(
     buttonBackground = BrandWine,
     buttonText = BrandBeige,
     inputBackground = NeutralGrayAlpha45,
-    cardBackground = BrandBeige
+    cardBackground = BrandBeige,
 )
 
 val BeigeColorScheme = BookFinderColors(
@@ -35,7 +35,7 @@ val BeigeColorScheme = BookFinderColors(
     buttonBackground = BrandWine,
     buttonText = BrandBeige,
     inputBackground = NeutralGrayAlpha45,
-    cardBackground = BrandBeige
+    cardBackground = BrandBeige,
 )
 
 val GrayColorScheme = BookFinderColors(
@@ -44,7 +44,7 @@ val GrayColorScheme = BookFinderColors(
     buttonBackground = BrandWine,
     buttonText = BrandBeige,
     inputBackground = NeutralGrayAlpha45,
-    cardBackground = BrandBeige
+    cardBackground = BrandBeige,
 )
 
 val RosewoodColorScheme = BookFinderColors(
@@ -53,7 +53,7 @@ val RosewoodColorScheme = BookFinderColors(
     buttonBackground = BrandWine,
     buttonText = BrandBeige,
     inputBackground = NeutralGrayAlpha45,
-    cardBackground = BrandBeige
+    cardBackground = BrandBeige,
 )
 
 val GreenColorScheme = BookFinderColors(
@@ -62,7 +62,7 @@ val GreenColorScheme = BookFinderColors(
     buttonBackground = BrandWine,
     buttonText = BrandBeige,
     inputBackground = BrandBeige,
-    cardBackground = BrandBeige
+    cardBackground = BrandBeige,
 )
 
 val LocalBookFinderColors = staticCompositionLocalOf { WineColorScheme }
@@ -78,7 +78,7 @@ object BookFinderTheme {
 @Composable
 fun BookFinderTheme(
     themeStyle: ThemeStyle = ThemeStyle.WINE,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
 
     val colorScheme = when (themeStyle) {
@@ -93,10 +93,10 @@ fun BookFinderTheme(
         typography = Typography,
         content = {
             CompositionLocalProvider(
-                LocalBookFinderColors provides colorScheme
+                LocalBookFinderColors provides colorScheme,
             ) {
                 content()
             }
-        }
+        },
     )
 }

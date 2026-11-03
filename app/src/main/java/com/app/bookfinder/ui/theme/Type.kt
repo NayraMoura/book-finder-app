@@ -10,33 +10,34 @@ import androidx.compose.ui.graphics.Color
 import com.app.bookfinder.R
 
 val JacquardFont = FontFamily(
-    Font(R.font.jacquard24_regular, FontWeight.Normal)
+    Font(R.font.jacquard24_regular, FontWeight.Normal),
 )
 
 val PoppinsFont = FontFamily(
-    Font(R.font.poppins_regular, FontWeight.Normal)
+    Font(R.font.poppins_regular, FontWeight.Normal),
 )
+
 val Typography = Typography(
     displayLarge = TextStyle(
         fontFamily = JacquardFont,
         fontWeight = FontWeight.Normal,
         fontSize = 32.sp,
-        color = Color(0xFFFFE5B4)
+        color = Color(0xFFFFE5B4),
     ),
     headlineMedium = TextStyle(
         fontFamily = JacquardFont,
         fontWeight = FontWeight.Normal,
         fontSize = 24.sp,
-        color = Color(0xFFFFE5B4)
+        color = Color(0xFFFFE5B4),
     ),
     bodyLarge = TextStyle(
         fontFamily = PoppinsFont,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
+        fontSize = 16.sp,
     ),
     labelLarge = TextStyle(
         fontFamily = PoppinsFont,
         fontWeight = FontWeight.Normal,
-        fontSize = 14.sp
-    )
+        fontSize = 14.sp,
+    ),
 )

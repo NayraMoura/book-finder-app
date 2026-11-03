@@ -15,19 +15,19 @@ import com.app.bookfinder.ui.theme.ThemeStyle
 fun PrimaryButton(
     text: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Button(
         onClick = onClick,
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(
             containerColor = BookFinderTheme.colors.buttonBackground,
-            contentColor = BookFinderTheme.colors.buttonText
-        )
+            contentColor = BookFinderTheme.colors.buttonText,
+        ),
     ) {
         Text(
             text = text,
-            style = BookFinderTheme.typography.labelLarge
+            style = BookFinderTheme.typography.labelLarge,
         )
     }
 }
@@ -39,7 +39,7 @@ fun PrimaryButtonPreview() {
         PrimaryButton(
             text = "Entrar",
             onClick = {},
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(16.dp),
         )
     }
 }

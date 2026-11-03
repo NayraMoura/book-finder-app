@@ -10,7 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.app.bookfinder.data.local.BookFinderDatabase
-import com.app.bookfinder.data.repository.UserRepository
+import com.app.bookfinder.data.local.repository.UserRepository
 import com.app.bookfinder.ui.screens.LoginScreen
 import com.app.bookfinder.ui.screens.LoginViewModel
 import com.app.bookfinder.ui.screens.LoginViewModelFactory
@@ -28,13 +28,13 @@ fun BookFinderNavHost() {
 
         composable(Routes.LOGIN) {
             val viewModel: LoginViewModel = viewModel(
-                factory = LoginViewModelFactory(repository)
+                factory = LoginViewModelFactory(repository),
             )
             val lastUser by viewModel.lastUser.collectAsState(initial = null)
 
             LoginScreen(
                 initialUsername = lastUser ?: "",
-                onLoginClick = { username, password ->
+                onLoginClick = { username, _ ->
                     val safeName = if (username.isNotBlank()) username.trim() else "Leitor"
 
                     viewModel.onLogin(safeName) { savedName ->
@@ -44,7 +44,7 @@ fun BookFinderNavHost() {
                         }
                     }
                 },
-                onRegisterClick = { }
+                onRegisterClick = {},
             )
         }
 
@@ -58,8 +58,7 @@ fun BookFinderNavHost() {
                         popUpTo(Routes.SEARCH) { inclusive = true }
                     }
                 },
-                onNextClick = {}
-            )
+            ) {}
         }
     }
 }
