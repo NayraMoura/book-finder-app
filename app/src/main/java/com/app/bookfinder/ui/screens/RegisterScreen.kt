@@ -1,5 +1,8 @@
 package com.app.bookfinder.ui.screens
 
+import android.widget.Toast
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -29,6 +32,7 @@ import com.app.bookfinder.components.PrimaryButton
 import com.app.bookfinder.ui.theme.BookFinderTheme
 import com.app.bookfinder.ui.theme.ThemeStyle
 import com.app.bookfinder.viewmodels.RegisterViewModel
+import androidx.compose.ui.zIndex
 
 @Composable
 fun RegisterScreen(
@@ -36,6 +40,15 @@ fun RegisterScreen(
     onNavigateBack: () -> Unit,
     onRegisterSuccess: () -> Unit
 ) {
+    val context = LocalContext.current
+
+    LaunchedEffect(viewModel.errorMessage) {
+        viewModel.errorMessage?.let { message ->
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            viewModel.clearError()
+        }
+    }
+
     RegisterScreenContent(
         name = viewModel.name,
         onNameChange = viewModel::onNameChange,
@@ -45,7 +58,12 @@ fun RegisterScreen(
         onPasswordChange = viewModel::onPasswordChange,
         confirmPassword = viewModel.confirmPassword,
         onConfirmPasswordChange = viewModel::onConfirmPasswordChange,
-        onRegisterClick = { viewModel.registerUser(onRegisterSuccess) },
+        onRegisterClick = {
+            viewModel.registerUser { successMessage ->
+                Toast.makeText(context, successMessage, Toast.LENGTH_SHORT).show()
+                onRegisterSuccess()
+            }
+        },
         onNavigateBack = onNavigateBack
     )
 }
@@ -75,6 +93,7 @@ fun RegisterScreenContent(
                 .padding(start = 24.dp, top = 40.dp)
                 .size(32.dp)
                 .align(Alignment.TopStart)
+                .zIndex(1f)
                 .clickable { onNavigateBack() },
         )
 

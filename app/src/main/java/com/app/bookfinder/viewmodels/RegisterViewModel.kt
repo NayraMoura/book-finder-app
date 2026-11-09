@@ -12,42 +12,59 @@ import kotlinx.coroutines.launch
 
 class RegisterViewModel(private val repository: UserRepository) : ViewModel() {
 
-    // Estados reativos que a UI vai observar
     var name by mutableStateOf("")
         private set
-
     var email by mutableStateOf("")
         private set
-
     var password by mutableStateOf("")
         private set
-
     var confirmPassword by mutableStateOf("")
         private set
 
-    // Funções para atualizar o estado conforme o usuário digita
+    var errorMessage by mutableStateOf<String?>(null)
+        private set
+
     fun onNameChange(newName: String) { name = newName }
     fun onEmailChange(newEmail: String) { email = newEmail }
     fun onPasswordChange(newPassword: String) { password = newPassword }
     fun onConfirmPasswordChange(newConfirmPassword: String) { confirmPassword = newConfirmPassword }
 
-    // Lógica de persistência
-    fun registerUser(onSuccess: () -> Unit) {
+    fun clearError() { errorMessage = null }
+    fun registerUser(onSuccess: (String) -> Unit) {
         viewModelScope.launch {
-            if (name.isNotBlank() && email.isNotBlank() && password.isNotBlank() && password == confirmPassword) {
+            if (name.isBlank() || email.isBlank() || password.isBlank() || confirmPassword.isBlank()) {
+                errorMessage = "Por favor, preencha todos os campos."
+                return@launch
+            }
+
+            if (password != confirmPassword) {
+                errorMessage = "As senhas digitadas não coincidem."
+                return@launch
+            }
+
+            if (password.length < 6) {
+                errorMessage = "Sua senha deve ter pelo menos 6 caracteres."
+                return@launch
+            }
+
+            try {
                 val newUser = UserEntity(
                     username = name,
                     email = email,
                     password = password
                 )
                 repository.insertUser(newUser)
-                onSuccess()
+
+                onSuccess("Conta criada com sucesso! Faça login para continuar.")
+
+            } catch (e: Exception) {
+                errorMessage = "Erro ao criar conta. Tente novamente."
+                e.printStackTrace()
             }
         }
     }
 }
 
-// Factory necessária para injetar o UserRepository no ViewModel
 class RegisterViewModelFactory(private val repository: UserRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(RegisterViewModel::class.java)) {
