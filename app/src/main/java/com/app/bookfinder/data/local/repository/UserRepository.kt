@@ -5,8 +5,7 @@ import com.app.bookfinder.data.local.UserEntity
 
 class UserRepository(private val userDao: UserDao) {
 
-    suspend fun saveUser(username: String) {
-        val user = UserEntity(username = username)
+    suspend fun insertUser(user: UserEntity) {
         userDao.insertUser(user)
     }
 
