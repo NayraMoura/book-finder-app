@@ -1,7 +1,7 @@
 # Book Finder 📚
 
 **Nome:** Nayra dos Santos Moura  
-**Data de entrega:** 30/10/26  
+**Data de entrega:** 02/11/26  
 
 ---
 
@@ -13,21 +13,21 @@ Para solucionar esta dor, o aplicativo foi desenvolvido pensando em leitores áv
 
 ---
 
-## 🚀 O que o APLICATIVO faz: Propósito e funcionalidades principais
+## 🚀 Propósito e funcionalidades principais
 
 ### Propósito
 O **Book Finder** é um aplicativo Android desenvolvido para auxiliar leitores a descobrirem novas leituras de forma rápida, intuitiva e personalizada.
 
 ### Funcionalidades principais
 - **Autenticação e Registro de Leitores**: Tela de login intuitiva onde o usuário insere seu nome de usuário e senha.
-- **Persistência Local do Usuário**: Armazena o histórico do último usuário logado no banco de dados local (Room) para recuperar e auto-preencher os dados em acessos futuros.
+- **Persistência Local do Usuário**: Armazena o histórico do último usuário logado no banco de dados local (Room) para recuperar e auto-preencher os dados em acessos futuros via `StateFlow`.
 - **Guia Literário Personalizado**: Tela de recepção e direcionamento de busca literária personalizada com o nome do usuário.
 - **Navegação Fluida**: Transição segura e reativa entre telas utilizando Jetpack Navigation Compose.
 - **Interface Temática**: Design moderno e adaptável totalmente construído em Jetpack Compose com sistema de temas dinâmico (`BookFinderTheme`).
 
 ---
 
-## 🛠️ Como ele deve ser utilizado: Guias de uso e integração
+## 🛠️ Guias de uso e integração
 
 ### Requisitos do Sistema
 - **Android Studio**: Ladybug / Jellyfish ou superior
@@ -43,7 +43,7 @@ O **Book Finder** é um aplicativo Android desenvolvido para auxiliar leitores a
 
 ---
 
-## 📜 Quais são seus contratos: Definições de APIs e tipos de dados
+## 📜 Definições de APIs e tipos de dados
 
 ### 1. Entidade de Banco de Dados (`UserEntity`)
 Representa a tabela local `users` gerenciada pelo Room Database:
@@ -52,7 +52,7 @@ Representa a tabela local `users` gerenciada pelo Room Database:
 @Entity(tableName = "users")
 data class UserEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val username: String
+    val username: String,
 )
 ```
 
@@ -84,7 +84,7 @@ object Routes {
 
 ---
 
-## 🏛️ Quais decisões foram tomadas: O histórico de arquitetura
+## 🏛️ O histórico de arquitetura
 
 O aplicativo foi estruturado seguindo os princípios de **Clean Architecture** e o padrão **MVVM (Model-View-ViewModel)** recomendado pelo Google para desenvolvimento Android moderno:
 
@@ -103,8 +103,17 @@ O aplicativo foi estruturado seguindo os princípios de **Clean Architecture** e
 4. **Navegação com Navigation Compose**:
    - Desacoplamento entre as telas usando o `BookFinderNavHost`, garantindo transferência de parâmetros limpa e navegação segura.
 
+---
+
+## 📌 Escopo Atual e Futuras Implementações (Roadmap)
+
+- **Login Social (Google)**: A opção visual do Google na tela de login é atualmente um elemento de interface (*placeholder UI*). A integração completa com a API do Google Sign-In / OAuth 2.0 está planejada para versões futuras.
+- **Catálogo de Livros e APIs Externas**: Expansão do repositório para consumir APIs REST externas (como a Google Books API) para pesquisa de títulos e recomendações em tempo real.
+
+---
+
 ## 🎨 Design e Prototipagem
 
-A interface deste MVP foi planeada com foco na experiência do utilizador. Pode consultar o moodboard completo e as telas que serão desenvolvidas nas próximas versões do aplicativo através do protótipo interativo:
+A interface deste MVP foi planeada com foco na experiência do utilizador. O moodboard completo e as telas que serão desenvolvidas nas próximas versões do aplicativo, estão disponíveis para visualização através do protótipo interativo:
 
 👉 **[Acessar Protótipo no Figma](https://www.figma.com/design/cdYEoJEFkGpZwzK6BlZE2U/Design-System?node-id=0-1&t=D7OnImJjWRHlxbNd-1)**
