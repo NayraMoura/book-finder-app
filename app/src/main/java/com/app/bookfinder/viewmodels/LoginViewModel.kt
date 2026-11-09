@@ -1,4 +1,4 @@
-package com.app.bookfinder.ui.screens
+package com.app.bookfinder.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -26,7 +26,6 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
 
     fun onLogin(username: String, onSuccess: (String) -> Unit) {
         viewModelScope.launch {
-            repository.saveUser(username)
             onSuccess(username)
         }
     }
