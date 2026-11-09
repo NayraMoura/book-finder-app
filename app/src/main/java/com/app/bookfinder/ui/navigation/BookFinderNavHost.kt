@@ -14,6 +14,8 @@ import com.app.bookfinder.data.local.repository.UserRepository
 import com.app.bookfinder.ui.screens.LoginScreen
 import com.app.bookfinder.ui.screens.RegisterScreen
 import com.app.bookfinder.ui.screens.SearchScreen
+import com.app.bookfinder.ui.theme.BookFinderTheme
+import com.app.bookfinder.ui.theme.ThemeStyle
 import com.app.bookfinder.viewmodels.LoginViewModel
 import com.app.bookfinder.viewmodels.LoginViewModelFactory
 import com.app.bookfinder.viewmodels.RegisterViewModel
@@ -48,30 +50,29 @@ fun BookFinderNavHost() {
                     }
                 },
                 onRegisterClick = {
-                    // Navega para a tela de registro
                     navController.navigate(Routes.REGISTER)
                 },
             )
         }
 
-        // Nova rota de cadastro
         composable(Routes.REGISTER) {
             val registerViewModel: RegisterViewModel = viewModel(
                 factory = RegisterViewModelFactory(repository)
             )
 
-            RegisterScreen(
-                viewModel = registerViewModel,
-                onNavigateBack = {
-                    navController.popBackStack()
-                },
-                onRegisterSuccess = {
-                    // Volta para o Login e remove a tela de cadastro do histórico do botão Voltar do Android
-                    navController.navigate(Routes.LOGIN) {
-                        popUpTo(Routes.REGISTER) { inclusive = true }
+            BookFinderTheme(themeStyle = ThemeStyle.GRAY) {
+                RegisterScreen(
+                    viewModel = registerViewModel,
+                    onNavigateBack = {
+                        navController.popBackStack()
+                    },
+                    onRegisterSuccess = {
+                        navController.navigate(Routes.LOGIN) {
+                            popUpTo(Routes.REGISTER) { inclusive = true }
+                        }
                     }
-                }
-            )
+                )
+            }
         }
 
         composable(Routes.SEARCH) { backStackEntry ->

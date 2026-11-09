@@ -67,7 +67,6 @@ fun LoginScreen(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        // Subtitle
         Text(
             text = "Faça login e me me deixe ajudar-lo(a) a encontrar um bom livro!",
             style = BookFinderTheme.typography.bodyLarge,
@@ -84,7 +83,7 @@ fun LoginScreen(
                 .padding(horizontal = 20.dp),
             contentAlignment = Alignment.TopCenter,
         ) {
-            // Card Content Container
+
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
