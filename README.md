@@ -102,3 +102,9 @@ O aplicativo foi estruturado seguindo os princípios de **Clean Architecture** e
 
 4. **Navegação com Navigation Compose**:
    - Desacoplamento entre as telas usando o `BookFinderNavHost`, garantindo transferência de parâmetros limpa e navegação segura.
+
+## 🎨 Design e Prototipagem
+
+A interface deste MVP foi planeada com foco na experiência do utilizador. Pode consultar o moodboard completo e as telas que serão desenvolvidas nas próximas versões do aplicativo através do protótipo interativo:
+
+👉 **[Acessar Protótipo no Figma](https://www.figma.com/design/cdYEoJEFkGpZwzK6BlZE2U/Design-System?node-id=0-1&t=D7OnImJjWRHlxbNd-1)**
